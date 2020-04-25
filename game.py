@@ -6,6 +6,8 @@ end = False
 
 bg_color = (156, 156, 156)
 player_color = (0,0,0)
+obst_color = (0,155,0)
+
 pygame.init()
 
 window = 700,500
@@ -19,9 +21,18 @@ y = 250
 y_vel = 0
 border = 480
 
+xloc = 500
+yloc = 0
+xtam = 70
+ytam = 70
+
+vel_obst = 2.5
+
 def player(x, y):
     pygame.draw.circle(screen, player_color, [x, y], 20)
 
+def obst(xloc, yloc, xtam, ytam):
+    pygame.draw.rect(screen, obst_color, [xloc, yloc, xtam, ytam])
 
 def gameover():
     template = pygame.font.SysFont(None, 25)
@@ -45,8 +56,13 @@ while not end:
 
     screen.fill(bg_color)
     player(x, y)
+    obst(xloc, yloc, xtam, ytam)
 
     y = y + y_vel
+    xloc = xloc - vel_obst
+
+    if xloc < -70:
+        xloc = 600
 
     if y > border:
         gameover()
