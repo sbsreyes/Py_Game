@@ -1,6 +1,7 @@
 # Simulacion del juego de flappy bird
 
 import pygame
+from random import randint
 
 end = False
 
@@ -24,15 +25,17 @@ border = 480
 xloc = 500
 yloc = 0
 xtam = 70
-ytam = 70
+ytam = randint(0, 450)
 
 vel_obst = 2.5
 
+space = randint(26, 450)
 def player(x, y):
     pygame.draw.circle(screen, player_color, [x, y], 20)
 
 def obst(xloc, yloc, xtam, ytam):
-    pygame.draw.rect(screen, obst_color, [xloc, yloc, xtam, ytam])
+    pygame.draw.rect(screen, obst_color, [xloc, yloc, xtam, ytam]),
+    pygame.draw.rect(screen, obst_color,[xloc, int(space + ytam), xtam, 500])
 
 def gameover():
     template = pygame.font.SysFont(None, 25)
@@ -63,6 +66,7 @@ while not end:
 
     if xloc < -70:
         xloc = 600
+        ytam = randint(0,350)
 
     if y > border:
         gameover()
